@@ -1,5 +1,5 @@
 ================================================================================
-  FlightPadFMC — Native Android FMC / MCDU for PMDG 737, PMDG 777, iFly 737 MAX, FlyByWire A320 & Fenix A320
+  FlightPadFMC — Native Android & Windows FMC / MCDU for PMDG 737, PMDG 777, iFly 737 MAX, FlyByWire A320 & Fenix A320
   Version 0.4.1
   By SilenceDIY (Marcus)
   https://github.com/diymarcus/FlightPadFMC
@@ -23,8 +23,8 @@ Five separate Android apps are provided, one per aircraft type:
   - FBWA320.apk      — FlyByWire A32NX (via SimBridge)
   - FenixA320.apk    — Fenix A320 v2 (via Fenix's built-in GraphQL server)
 
-One Windows server acts as the bridge between MSFS and the Android apps. The
-same server handles all five aircraft — simply launch the matching app on
+One Windows server acts as the bridge between MSFS and the Android and native
+Windows clients. The same server handles all five aircraft — simply launch the matching app on
 your tablet and the server figures out the rest.
 
 Supported platforms:
@@ -32,6 +32,42 @@ Supported platforms:
   - Microsoft Flight Simulator 2024 (SimConnect v12)
   - Android 4.4 through Android 14 (single APK per aircraft)
   - Windows 10 / 11, 64-bit (server app)
+  - Native Windows VCL Win32 clients (Delphi)
+
+
+NATIVE WINDOWS CLIENTS
+----------------------
+This fork also includes native Delphi Windows applications (VCL / Win32),
+connecting to the existing FlightPadFMCServer.
+Each aircraft has two standalone EXEs:
+
+| Aircraft | Full CDU / MCDU | Screen only |
+| --- | --- | --- |
+| PMDG 737 | PMDG737FMC.exe | PMDG737Screen.exe |
+| PMDG 777 | PMDG777FMC.exe | PMDG777Screen.exe |
+| FlyByWire A320 | FBWA320MCDU.exe | FBWA320Screen.exe |
+| Fenix A320 | FenixA320MCDU.exe | FenixA320Screen.exe |
+| iFly 737 MAX | iFlyFMC.exe | iFlyScreen.exe |
+
+The full clients provide the aircraft skin, clickable keys and keyboard
+input. Screen-only clients are intended as displays for physical DIY FMC/MCDU
+panels, with keypad input supplied by the panel setup. They provide a scalable
+display with independent
+borderless and fullscreen options. F10 opens Settings, F11 toggles fullscreen,
+and Esc leaves fullscreen in the screen-only clients. Window positions and
+preferences are saved separately for each aircraft and variant.
+
+Build and package all ten EXEs with `powershell -ExecutionPolicy Bypass -File Windows/build.ps1` (Delphi with VCL and Indy required). The generated combined package is
+`Windows/packages/FlightPadFMC-Windows.zip`; all EXEs can share one directory
+and the adjacent `assets` folder. FlightPadFMCServer is still required.
+
+Delphi 10 and later are the intended compiler family. Builds and tests were
+verified with Delphi 10.2; other versions are not yet verified. Based on the
+RTL APIs used, XE8 is the earliest source-compatible candidate.
+
+See [Windows documentation](Windows/README.md) for setup, controls and tests.
+Windows client development: © 2026 DJ M@fi0zo™.
+Original Android apps and server: SilenceDIY (Marcus).
 
 
 HOW IT WORKS

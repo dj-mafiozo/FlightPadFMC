@@ -1,0 +1,180 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{F76CFD14-9E59-4A60-A182-EC62F30CABC3}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="FBWA320\FBWA320MCDU.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FenixA320\FenixA320MCDU.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="PMDG737\PMDG737FMC.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="iFly737MAX\iFlyFMC.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="PMDG777\PMDG777FMC.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FBWA320\FBWA320Screen.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="FenixA320\FenixA320Screen.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="iFly737MAX\iFlyScreen.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="PMDG737\PMDG737Screen.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="PMDG777\PMDG777Screen.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="tests\ClientTests.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="tests\DiscoveryTests.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="tests\ScreenTests.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="FBWA320MCDU">
+        <MSBuild Projects="FBWA320\FBWA320MCDU.dproj"/>
+    </Target>
+    <Target Name="FBWA320MCDU:Clean">
+        <MSBuild Projects="FBWA320\FBWA320MCDU.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="FBWA320MCDU:Make">
+        <MSBuild Projects="FBWA320\FBWA320MCDU.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="FenixA320MCDU">
+        <MSBuild Projects="FenixA320\FenixA320MCDU.dproj"/>
+    </Target>
+    <Target Name="FenixA320MCDU:Clean">
+        <MSBuild Projects="FenixA320\FenixA320MCDU.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="FenixA320MCDU:Make">
+        <MSBuild Projects="FenixA320\FenixA320MCDU.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="PMDG737FMC">
+        <MSBuild Projects="PMDG737\PMDG737FMC.dproj"/>
+    </Target>
+    <Target Name="PMDG737FMC:Clean">
+        <MSBuild Projects="PMDG737\PMDG737FMC.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PMDG737FMC:Make">
+        <MSBuild Projects="PMDG737\PMDG737FMC.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="iFlyFMC">
+        <MSBuild Projects="iFly737MAX\iFlyFMC.dproj"/>
+    </Target>
+    <Target Name="iFlyFMC:Clean">
+        <MSBuild Projects="iFly737MAX\iFlyFMC.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="iFlyFMC:Make">
+        <MSBuild Projects="iFly737MAX\iFlyFMC.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="PMDG777FMC">
+        <MSBuild Projects="PMDG777\PMDG777FMC.dproj"/>
+    </Target>
+    <Target Name="PMDG777FMC:Clean">
+        <MSBuild Projects="PMDG777\PMDG777FMC.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PMDG777FMC:Make">
+        <MSBuild Projects="PMDG777\PMDG777FMC.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="FBWA320Screen">
+        <MSBuild Projects="FBWA320\FBWA320Screen.dproj"/>
+    </Target>
+    <Target Name="FBWA320Screen:Clean">
+        <MSBuild Projects="FBWA320\FBWA320Screen.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="FBWA320Screen:Make">
+        <MSBuild Projects="FBWA320\FBWA320Screen.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="FenixA320Screen">
+        <MSBuild Projects="FenixA320\FenixA320Screen.dproj"/>
+    </Target>
+    <Target Name="FenixA320Screen:Clean">
+        <MSBuild Projects="FenixA320\FenixA320Screen.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="FenixA320Screen:Make">
+        <MSBuild Projects="FenixA320\FenixA320Screen.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="iFlyScreen">
+        <MSBuild Projects="iFly737MAX\iFlyScreen.dproj"/>
+    </Target>
+    <Target Name="iFlyScreen:Clean">
+        <MSBuild Projects="iFly737MAX\iFlyScreen.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="iFlyScreen:Make">
+        <MSBuild Projects="iFly737MAX\iFlyScreen.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="PMDG737Screen">
+        <MSBuild Projects="PMDG737\PMDG737Screen.dproj"/>
+    </Target>
+    <Target Name="PMDG737Screen:Clean">
+        <MSBuild Projects="PMDG737\PMDG737Screen.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PMDG737Screen:Make">
+        <MSBuild Projects="PMDG737\PMDG737Screen.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="PMDG777Screen">
+        <MSBuild Projects="PMDG777\PMDG777Screen.dproj"/>
+    </Target>
+    <Target Name="PMDG777Screen:Clean">
+        <MSBuild Projects="PMDG777\PMDG777Screen.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="PMDG777Screen:Make">
+        <MSBuild Projects="PMDG777\PMDG777Screen.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ClientTests">
+        <MSBuild Projects="tests\ClientTests.dproj"/>
+    </Target>
+    <Target Name="ClientTests:Clean">
+        <MSBuild Projects="tests\ClientTests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ClientTests:Make">
+        <MSBuild Projects="tests\ClientTests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="DiscoveryTests">
+        <MSBuild Projects="tests\DiscoveryTests.dproj"/>
+    </Target>
+    <Target Name="DiscoveryTests:Clean">
+        <MSBuild Projects="tests\DiscoveryTests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="DiscoveryTests:Make">
+        <MSBuild Projects="tests\DiscoveryTests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="ScreenTests">
+        <MSBuild Projects="tests\ScreenTests.dproj"/>
+    </Target>
+    <Target Name="ScreenTests:Clean">
+        <MSBuild Projects="tests\ScreenTests.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="ScreenTests:Make">
+        <MSBuild Projects="tests\ScreenTests.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="FBWA320MCDU;FenixA320MCDU;PMDG737FMC;iFlyFMC;PMDG777FMC;FBWA320Screen;FenixA320Screen;iFlyScreen;PMDG737Screen;PMDG777Screen;ClientTests;DiscoveryTests;ScreenTests"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="FBWA320MCDU:Clean;FenixA320MCDU:Clean;PMDG737FMC:Clean;iFlyFMC:Clean;PMDG777FMC:Clean;FBWA320Screen:Clean;FenixA320Screen:Clean;iFlyScreen:Clean;PMDG737Screen:Clean;PMDG777Screen:Clean;ClientTests:Clean;DiscoveryTests:Clean;ScreenTests:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="FBWA320MCDU:Make;FenixA320MCDU:Make;PMDG737FMC:Make;iFlyFMC:Make;PMDG777FMC:Make;FBWA320Screen:Make;FenixA320Screen:Make;iFlyScreen:Make;PMDG737Screen:Make;PMDG777Screen:Make;ClientTests:Make;DiscoveryTests:Make;ScreenTests:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>

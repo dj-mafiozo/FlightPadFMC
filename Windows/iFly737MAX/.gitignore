@@ -1,0 +1,13 @@
+﻿# Generated Delphi output and local IDE state
+*.dcu
+*.exe
+*.map
+*.rsm
+*.identcache
+*.local
+*.dsk
+__history/
+__recovery/
+tests/assets/
+tests/gui-preview.bmp
+*.zip

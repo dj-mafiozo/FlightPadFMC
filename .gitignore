@@ -101,8 +101,35 @@ Product/
 Test/
 Wbsite.txt
 Server_Console.jpg
-tools/
+/tools/
 
 # ── Logs ────────────────────────────────────────────────────────────────
 FlightPadFMC_log.txt
 FlightPadFMC_log_old.txt
+
+# Delphi / RAD Studio compiled output and local IDE state
+*.dcu
+*.dcp
+*.bpl
+*.obj
+*.drc
+*.map
+*.rsm
+*.tds
+*.identcache
+*.dproj.local
+*.groupproj.local
+*.dsk
+*.ddp
+*.tvs
+*.stat
+*.~*
+__history/
+__recovery/
+/Windows/**/Win32/
+/Windows/**/Win64/
+/Windows/**/Debug/
+/Windows/**/Release/
+
+# Keep Windows source, DFM forms, projects and build tools in version control.
+# Windows/.gitignore excludes the native EXEs, ZIPs and package staging folders.

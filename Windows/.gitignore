@@ -1,0 +1,17 @@
+﻿# Native Windows build output and local Delphi state
+*.dcu
+*.exe
+*.zip
+*.map
+*.rsm
+*.res
+*.identcache
+*.local
+*.dsk
+__history/
+__recovery/
+packages/
+tests/build/
+*.stat
+
+tests/dns-*.bin
