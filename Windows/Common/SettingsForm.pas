@@ -9,6 +9,9 @@ Interface
  Type
   TSettingsForm = Class(TForm)
    Published
+    RefocusMSFS: TCheckBox;
+    RefocusInterval: TEdit;
+    RefocusLabel: TLabel;
     ConnectionMode, DefaultSide                                     : TRadioGroup;
     ServerHost, ServerPort                                          : TEdit;
     FullscreenWindow, BorderlessWindow, ButtonSound, HapticFeedback : TCheckBox;
@@ -34,6 +37,8 @@ Implementation
    Inherited Create(AOwner);
    Caption                  := P.Title + ' - Settings';
    FValues                  := Values;
+   RefocusMSFS.Checked := Values.RefocusMSFS;
+   RefocusInterval.Text := IntToStr(Values.RefocusSeconds);
    FullscreenWindow.Visible := P.ScreenOnly;
    FullscreenWindow.Checked := Values.Fullscreen;
    If Values.AutoDiscover Then
@@ -62,6 +67,8 @@ Implementation
    Error     : String;
   Begin
    Candidate      := FValues;
+   Candidate.RefocusMSFS := RefocusMSFS.Checked;
+   If Not TryStrToInt(RefocusInterval.Text, Candidate.RefocusSeconds) Then Candidate.RefocusSeconds := 0;
    Candidate.Host := Trim(ServerHost.Text);
    If Not TryStrToInt(ServerPort.Text, Candidate.Port) Then
     Candidate.Port        := 0;

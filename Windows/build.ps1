@@ -67,7 +67,17 @@ foreach ($client in $clients) {
 Copy-Item -LiteralPath (Join-Path $PSScriptRoot 'README.md') -Destination $flatStage -Force
 # Archive build outputs: deployed EXEs in All may currently be running.
 $flatFiles = @($clients | ForEach-Object { Join-Path $PSScriptRoot ($_.Folder+'\build\'+$_.Program+'.exe'); Join-Path $PSScriptRoot ($_.Folder+'\build\'+$_.Screen+'.exe') })
-$flatFiles += $archiveAssets, (Join-Path $flatStage 'README.md')
+$serverFiles = @('FlightPadFMCServer.exe', 'SDK2020\SimConnect.dll', 'SDK2024\SimConnect.dll')
+$serverStage = Join-Path $PSScriptRoot 'packages\Archive\server'
+$distRoot = Join-Path (Split-Path $PSScriptRoot -Parent) 'dist'
+foreach ($relative in $serverFiles) {
+    foreach ($targetRoot in @($serverStage, (Join-Path $flatStage 'server'))) {
+        $target = Join-Path $targetRoot $relative
+        New-Item -ItemType Directory -Path (Split-Path $target -Parent) -Force | Out-Null
+        Copy-Item -LiteralPath (Join-Path $distRoot $relative) -Destination $target -Force
+    }
+}
+$flatFiles += $archiveAssets, (Join-Path $flatStage 'README.md'), $serverStage
 Compress-Archive -LiteralPath $flatFiles -DestinationPath `
     (Join-Path $PSScriptRoot 'packages\FlightPadFMC-Windows.zip') -Force
 if ($Test) {

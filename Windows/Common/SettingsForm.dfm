@@ -3,7 +3,7 @@ object SettingsForm: TSettingsForm
   Top = 0
   BorderStyle = bsDialog
   Caption = 'Settings'
-  ClientHeight = 690
+  ClientHeight = 754
   ClientWidth = 450
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -15,7 +15,7 @@ object SettingsForm: TSettingsForm
   Position = poOwnerFormCenter
   DesignSize = (
     450
-    690)
+    754)
   PixelsPerInch = 96
   TextHeight = 17
   object HeaderLabel: TLabel
@@ -72,7 +72,7 @@ object SettingsForm: TSettingsForm
   end
   object StatusLabel: TLabel
     Left = 20
-    Top = 542
+    Top = 606
     Width = 410
     Height = 40
     Anchors = [akLeft, akRight, akBottom]
@@ -82,7 +82,7 @@ object SettingsForm: TSettingsForm
   end
   object ErrorLabel: TLabel
     Left = 20
-    Top = 588
+    Top = 652
     Width = 410
     Height = 44
     Anchors = [akLeft, akRight, akBottom]
@@ -156,13 +156,36 @@ object SettingsForm: TSettingsForm
     Caption = 'Fullscreen (F11)'
     TabOrder = 6
   end
+  object RefocusMSFS: TCheckBox
+    Left = 20
+    Top = 452
+    Width = 410
+    Height = 24
+    Caption = 'Automatically refocus MSFS 2024'
+    TabOrder = 7
+  end
+  object RefocusLabel: TLabel
+    Left = 20
+    Top = 487
+    Width = 290
+    Height = 20
+    Caption = 'Refocus interval (seconds, 1-60)'
+  end
+  object RefocusInterval: TEdit
+    Left = 336
+    Top = 484
+    Width = 94
+    Height = 25
+    NumbersOnly = True
+    TabOrder = 8
+  end
   object SideSection: TPanel
     Left = 0
-    Top = 456
+    Top = 520
     Width = 450
     Height = 86
     BevelOuter = bvNone
-    TabOrder = 7
+    TabOrder = 9
     object DefaultSide: TRadioGroup
       Left = 20
       Top = 0
@@ -178,24 +201,24 @@ object SettingsForm: TSettingsForm
   end
   object SaveButton: TButton
     Left = 232
-    Top = 642
+    Top = 706
     Width = 94
     Height = 30
     Anchors = [akRight, akBottom]
     Caption = 'Save'
     Default = True
-    TabOrder = 8
+    TabOrder = 10
     OnClick = SaveClick
   end
   object CancelButton: TButton
     Left = 336
-    Top = 642
+    Top = 706
     Width = 94
     Height = 30
     Anchors = [akRight, akBottom]
     Cancel = True
     Caption = 'Cancel'
     ModalResult = 2
-    TabOrder = 9
+    TabOrder = 11
   end
 end

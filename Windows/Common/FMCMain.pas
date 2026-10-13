@@ -14,6 +14,7 @@ Interface
     ScreenMenu: TPopupMenu;
     SettingsItem, FullscreenItem, CloseItem: TMenuItem;
     FPaint                         : TPaintBox;
+    FRefocusTimer: TTimer;
     FTimer                         : TTimer;
     Procedure MenuSettings(Sender: TObject);
     Procedure MenuFullscreen(Sender: TObject);
@@ -22,10 +23,12 @@ Interface
     Procedure FitBackground(Sender : TObject);
     Procedure PaintCDU(Sender : TObject);
     Procedure ClickCDU(Sender : TObject; Button : TMouseButton; Shift : TShiftState; X, Y : Integer);
+    Procedure RefocusTick(Sender: TObject);
     Procedure Tick(Sender : TObject);
     Procedure Keyboard(Sender : TObject; Var Key : Char);
     Procedure Shortcut(Sender : TObject; Var Key : Word; Shift : TShiftState);
    Private
+    FSettingsOpen: Boolean;
     FFullscreen: Boolean;
     FWindowedBounds: TRect;
     FProfile                       : TAircraftProfile;
@@ -68,7 +71,7 @@ Implementation
 {$R *.dfm}
 
  Uses
-  Profile, SettingsForm, Winapi.MMSystem;
+  Profile, SettingsForm, SimFocus, Winapi.MMSystem;
 
  Constructor TFMCForm.Create(AOwner : TComponent);
   Var
@@ -120,6 +123,8 @@ Implementation
    FFontFile  := IncludeTrailingPathDelimiter(AssetBase) + 'assets\B612Mono-Bold.ttf';
    FSoundFile := IncludeTrailingPathDelimiter(AssetBase) + 'assets\' + P.SoundFile;
    AddFontResourceEx(PChar(FFontFile), FR_PRIVATE, Nil);
+   FRefocusTimer.Interval := FSettings.RefocusSeconds * 1000;
+   FRefocusTimer.Enabled := FSettings.RefocusMSFS;
    FTimer.Enabled := True;
    If AutoConnect Then
     Connect(Nil);
@@ -127,6 +132,7 @@ Implementation
 
  Destructor TFMCForm.Destroy;
   Begin
+   If FRefocusTimer <> Nil Then FRefocusTimer.Enabled := False;
    If FTimer <> Nil Then
     FTimer.Enabled := False;
    FTransport.Free;
@@ -146,10 +152,12 @@ Implementation
    If FEndpoint <> '' Then
     Status := Status + ' (' + FEndpoint + ')';
    Dialog  := TSettingsForm.CreateSettings(Self, FProfile, FSettings, Status);
+   FSettingsOpen := True;
    Try
     If Dialog.ShowModal = mrOk Then
      UpdateSettings(Dialog.Values);
    Finally
+    FSettingsOpen := False;
     Dialog.Free
    End;
   End;
@@ -169,6 +177,9 @@ Implementation
    Changed := (Candidate.Host <> FSettings.Host) Or (Candidate.Port <> FSettings.Port) Or (Candidate.AutoDiscover <> FSettings.AutoDiscover);
    ClientSettings.SaveSettings(FConfig, Candidate);
    FSettings := Candidate;
+   FRefocusTimer.Enabled := False;
+   FRefocusTimer.Interval := FSettings.RefocusSeconds * 1000;
+   FRefocusTimer.Enabled := FSettings.RefocusMSFS;
    ApplyFullscreen;
    ApplyWindowStyle;
    If Reconnect And (Changed Or Not FConnected) Then
@@ -625,6 +636,16 @@ Implementation
        Key := 0
       End;
     End;
+  End;
+
+ Procedure TFMCForm.RefocusTick(Sender: TObject);
+  Var PID: DWORD;
+  Begin
+   If Not FSettings.RefocusMSFS Then Exit;
+   PID := 0;
+   GetWindowThreadProcessId(GetForegroundWindow, @PID);
+   If CanRefocus(PID, GetCurrentProcessId, FSettingsOpen, GetCapture <> 0) Then
+    RefocusMSFS2024;
   End;
 
  Procedure TFMCForm.Tick(Sender : TObject);

@@ -7,6 +7,8 @@ Interface
 
  Type
   TClientSettings = Record
+   RefocusMSFS : Boolean;
+   RefocusSeconds : Integer;
    Host                  : String;
    Port                  : Integer;
    AutoDiscover, Sound   : Boolean;
@@ -29,6 +31,8 @@ Implementation
 
  Function DefaultSettings : TClientSettings;
   Begin
+   Result.RefocusMSFS := False;
+   Result.RefocusSeconds := 2;
    Result.Host         := '127.0.0.1';
    Result.Port         := 8765;
    Result.AutoDiscover := True;
@@ -48,6 +52,8 @@ Implementation
     Error := 'Enter a server IP address or host name.'
    Else If (Settings.Port < 1) Or (Settings.Port > 65535) Then
     Error := 'Server port must be between 1 and 65535.'
+   Else If (Settings.RefocusSeconds < 1) Or (Settings.RefocusSeconds > 60) Then
+    Error := 'Refocus interval must be between 1 and 60 seconds.'
    Else If (Settings.Side <> 'capt') And (Settings.Side <> 'fo') Then
     Error := 'Select Captain or First Officer CDU.';
    Result := Error = '';
@@ -68,6 +74,9 @@ Implementation
     Result.AutoDiscover := Ini.ReadString('Server', 'Mode', 'manual') = 'auto';
     If Not Ini.ValueExists('Server', 'Host') And Not Ini.ValueExists('Server', 'Mode') Then
      Result.AutoDiscover := True;
+    Result.RefocusMSFS := Ini.ReadBool('MSFS', 'Refocus', False);
+    Result.RefocusSeconds := Ini.ReadInteger('MSFS', 'RefocusSeconds', 2);
+    If (Result.RefocusSeconds < 1) Or (Result.RefocusSeconds > 60) Then Result.RefocusSeconds := 2;
     Result.Fullscreen := Ini.ReadBool('Window', 'Fullscreen', False);
     Result.Borderless    := Ini.ReadBool('Window', 'Borderless', False);
     Result.HasPosition := Ini.ReadBool('Window', 'HasPosition', False);
@@ -105,6 +114,8 @@ Implementation
      Ini.WriteString('Server', 'Mode', 'auto')
     Else
      Ini.WriteString('Server', 'Mode', 'manual');
+    Ini.WriteBool('MSFS', 'Refocus', Settings.RefocusMSFS);
+    Ini.WriteInteger('MSFS', 'RefocusSeconds', Settings.RefocusSeconds);
     Ini.WriteBool('Window', 'Fullscreen', Settings.Fullscreen);
     Ini.WriteBool('Window', 'Borderless', Settings.Borderless);
     Ini.WriteBool('Window', 'HasPosition', Settings.HasPosition);

@@ -48,4 +48,11 @@ object FMCForm: TFMCForm
       OnClick = MenuClose
     end
   end
+  object FRefocusTimer: TTimer
+    Enabled = False
+    Interval = 2000
+    OnTimer = RefocusTick
+    Left = 104
+    Top = 24
+  end
 end

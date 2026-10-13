@@ -4,7 +4,7 @@
 Uses
  Winapi.Windows, System.SysUtils, System.IOUtils, System.Types,
  Vcl.Forms, Vcl.Graphics, Vcl.StdCtrls, AircraftTypes, Profile, FMCMain,
- ClientSettings, SettingsForm, ScreenMain;
+ ClientSettings, SettingsForm, ScreenMain, SimFocus;
 
 Var
  F             : TFMCForm;
@@ -24,11 +24,29 @@ Procedure Check(Value : Boolean; Const Text : String);
 
 Begin
  Try
+  Check(CanRefocus(5,5,False,False),'Refocus allowed for client foreground');
+  Check(Not CanRefocus(6,5,False,False),'Refocus does not steal other app focus');
+  Check(Not CanRefocus(5,5,True,False),'Settings pauses refocus');
+  Check(Not CanRefocus(5,5,False,True),'Mouse capture pauses refocus');
   Application.Initialize;
   P            := CreateProfile;
   P.ScreenOnly := True;
   Config       := TPath.Combine(ExtractFilePath(ParamStr(0)), 'screen-test.ini');
   S            := DefaultSettings;
+  D := TSettingsForm.CreateSettings(Nil, P, S, 'Test');
+  Try
+   Check(Not D.RefocusMSFS.Checked, 'Refocus defaults off');
+   D.RefocusMSFS.Checked := True;
+   D.RefocusInterval.Text := '0';
+   Check(Not D.TryAccept, 'Refocus interval rejects zero');
+   D.RefocusInterval.Text := '3';
+   Check(D.TryAccept, 'Refocus options accepted');
+   S := D.Values;
+  Finally D.Free End;
+  ClientSettings.SaveSettings(Config, S);
+  S := ClientSettings.LoadSettings(Config);
+  Check(S.RefocusMSFS And (S.RefocusSeconds = 3), 'Refocus persistence');
+  S.RefocusMSFS := False;
   ClientSettings.SaveSettings(Config, S);
   F := TFMCForm.CreateConfigured(Nil, P, ParamStr(1), Config, False);
   B := TBitmap.Create;

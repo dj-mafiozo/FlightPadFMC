@@ -29,11 +29,13 @@ normal desktop use.
 1. Start MSFS and load the matching aircraft.
 2. Configure its bridge as described in the main repository README:
    PMDG SDK/CDU broadcast, FBW SimBridge, Fenix GraphQL or the iFly plugin.
-3. Run `FlightPadFMCServer.exe` from the repository's `dist` directory.
+3. Run `server/FlightPadFMCServer.exe` from the combined release package.
 4. Extract `packages/FlightPadFMC-Windows.zip` and launch the matching EXE.
    Keep the `assets` directory beside the executables.
 
-The combined ZIP contains all ten EXEs in one directory with shared assets.
+The combined ZIP contains all ten client EXEs in one directory with shared
+assets and a `server` folder containing FlightPadFMCServer and the MSFS 2020/2024
+SimConnect DLLs. Local server settings and logs are not included.
 Each aircraft package contains both its full and screen-only clients.
 Backgrounds and sounds use aircraft-specific names, avoiding collisions;
 B612 Mono is shared. Runtime packages are not required.
@@ -146,4 +148,15 @@ implemented. Windows clients require the existing server and aircraft bridge.
 
 Skins, fonts and sounds originate from the Android modules in this repository.
 See the repository root `LICENSE` for licensing.
-Windows client development: © 2026 DJ M@fi0zo™.
+Windows client development: Â© 2026 DJ M@fi0zoâ„˘.
+
+## MSFS 2024 refocus timer
+
+Settings includes **Automatically refocus MSFS 2024** (off by default) and
+a configurable interval of 1-60 seconds (default: 2). The timer returns
+focus to the visible window owned by `FlightSimulator2024.exe` while this
+client has foreground focus. It pauses during Settings and mouse capture
+(for example dragging); it does not take focus away from unrelated apps.
+The option is saved independently for each aircraft and full/screen variant.
+If MSFS 2024 is not running, the timer does nothing. Windows foreground
+activation rules still apply.
